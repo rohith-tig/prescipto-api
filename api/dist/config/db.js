@@ -18,8 +18,34 @@ exports.database = new sequelize_1.Sequelize({
     database: exports.db,
     host: exports.host,
     dialect: "postgres",
+    logging: false,
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000,
+    },
+    dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false,
+        },
+    },
 });
 exports.sequelize = new sequelize_1.Sequelize(exports.db, exports.user, exports.password, {
     host: exports.host,
     dialect: "postgres",
+    logging: false,
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000,
+    },
+    dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false,
+        },
+    },
 });
