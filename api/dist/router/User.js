@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const User_1 = require("../controller/User");
+const userAuth_1 = require("../middleware/userAuth");
+const multer_1 = require("../middleware/multer");
+const userRouter = (0, express_1.Router)();
+userRouter.get("/doctors/", User_1.userController);
+userRouter.post("/register", User_1.registerController);
+userRouter.post("/login", User_1.loginController);
+userRouter.get("/doctors/:speciality/", User_1.specialityController);
+userRouter.get("/appointment/:id/", User_1.singleDocController);
+userRouter.post("/book-appointment", userAuth_1.verifyToken, User_1.bookAppointmentController);
+userRouter.get("/get-appointments", userAuth_1.verifyToken, User_1.getAppController);
+userRouter.get("/user-info", userAuth_1.verifyToken, User_1.getUserController);
+userRouter.put("/cancel-appointment/:id", User_1.cancelBookingController);
+userRouter.put("/update-profile/", userAuth_1.verifyToken, multer_1.upload.single("profileImage"), User_1.updateUserProfileController);
+exports.default = userRouter;
