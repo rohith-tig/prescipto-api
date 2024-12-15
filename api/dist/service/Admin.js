@@ -41,11 +41,18 @@ const fetchResult = (db, query, method, replacements) => __awaiter(void 0, void 
         database: db,
         host: db_1.host,
         dialect: "postgres",
+        logging: false,
         pool: {
             max: 5,
             min: 0,
             acquire: 30000,
             idle: 10000,
+        },
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false,
+            },
         },
     });
     const result = yield (0, exports.executeQuery)(createDbConnection, query, method, replacements);
